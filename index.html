@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es-DO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EydenCode Solutions — software a la medida para negocios dominicanos</title>
+  <meta name="description" content="EydenCode Solutions, en Bajos de Haina: ECodePOS (facturación e inventario en la web, prueba gratis 15 días) y software de escritorio a la medida para microempresas dominicanas.">
+  <meta name="theme-color" content="#0A1824">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta property="og:title" content="EydenCode Solutions">
+  <meta property="og:description" content="Creamos ECodePOS: facturación, inventario y cobros para negocios dominicanos.">
+  <meta property="og:image" content="https://eydencodesolutions.com/img/logo-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Datos que puedes cambiar: dirección del sistema y contacto (abajo, en "contacto") ===== */
+    :root {
+      --abismo: #0A1824;     /* azul marino del logo */
+      --abismo-2: #0F2433;
+      --oceano: #0D6A9F;     /* azul */
+      --marea: #17C6B0;      /* turquesa */
+      --espuma: #EEF5F6;     /* fondo claro */
+      --tinta: #13222E;      /* texto */
+      --niebla: #586B77;     /* texto secundario */
+      --linea: #D3E2E6;
+      --titulos: "Bricolage Grotesque", "Segoe UI", sans-serif;
+      --texto: "Instrument Sans", "Segoe UI", sans-serif;
+      --ancho: 1120px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--espuma); color: var(--tinta); font: 400 1.0625rem/1.65 var(--texto); -webkit-font-smoothing: antialiased; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--marea); outline-offset: 3px; border-radius: 6px; }
+    .envoltura { width: min(var(--ancho), 100% - 32px); margin-inline: auto; }
+
+    /* ----- Barra ----- */
+    .barra { background: var(--abismo); color: #fff; }
+    .barra .envoltura { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+    .marca { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .marca img { width: 42px; height: 42px; border-radius: 10px; }
+    .marca span { font: 800 1.2rem/1 var(--titulos); letter-spacing: -.01em; }
+    .marca span b { font-weight: 800; }
+    .marca span i { font-style: normal; font-weight: 500; color: #9FD8E6; }
+    .barra nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .barra nav a { text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 500; color: #CFE3EA; }
+    .barra nav a:hover { color: #fff; background: rgba(255,255,255,.07); }
+    .barra nav a.entrar { color: var(--abismo); background: var(--marea); font-weight: 600; }
+    .barra nav a.entrar:hover { background: #3FDCC7; }
+
+    /* ----- Portada: la media luna del logo es el elemento central ----- */
+    .portada { background: var(--abismo); color: #fff; overflow: hidden; }
+    .portada .envoltura { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 24px; padding-block: 56px 88px; }
+    .portada h1 { font: 800 clamp(2.4rem, 5.6vw, 4.4rem)/1.02 var(--titulos); letter-spacing: -.035em; margin: 0 0 22px; max-width: 13ch; }
+    .portada p { color: #BCD3DC; font-size: 1.15rem; max-width: 46ch; margin: 0 0 32px; }
+    .acciones { display: flex; gap: 12px; flex-wrap: wrap; }
+    .boton { display: inline-block; text-decoration: none; font-weight: 600; padding: 13px 22px; border-radius: 10px; border: 2px solid transparent; }
+    .boton.principal { background: var(--marea); color: var(--abismo); }
+    .boton.principal:hover { background: #3FDCC7; }
+    .boton.borde { border-color: rgba(255,255,255,.35); color: #fff; }
+    .boton.borde:hover { border-color: #fff; }
+    .luna { width: 100%; max-width: 440px; justify-self: end; }
+    .luna .trazo { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dibujar 1.6s cubic-bezier(.6,.1,.2,1) .2s forwards; }
+    .luna .codigo { opacity: 0; animation: aparecer .6s ease-out 1.4s forwards; }
+    @keyframes dibujar { to { stroke-dashoffset: 0; } }
+    @keyframes aparecer { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .luna .trazo { animation: none; stroke-dashoffset: 0; }
+      .luna .codigo { animation: none; opacity: 1; }
+    }
+
+    /* ----- Secciones ----- */
+    section { padding-block: 80px; }
+    h2 { font: 700 clamp(1.8rem, 3.4vw, 2.6rem)/1.1 var(--titulos); letter-spacing: -.025em; margin: 0 0 14px; }
+    .entrada { color: var(--niebla); font-size: 1.1rem; max-width: 60ch; margin: 0 0 40px; }
+
+    /* ECodePOS: lo que hace, en lista de dos columnas (sin tarjetas) */
+    .producto .envoltura { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 56px; align-items: start; }
+    .funciones { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+    .funciones li { padding: 18px 0 18px 30px; border-top: 1px solid var(--linea); position: relative; }
+    .funciones li::before { content: ""; position: absolute; left: 0; top: 25px; width: 14px; height: 14px; border-radius: 50%;
+                            border: 3px solid var(--marea); border-right-color: transparent; transform: rotate(-35deg); }
+    .funciones b { display: block; font: 700 1.05rem/1.3 var(--titulos); margin-bottom: 2px; }
+    .funciones span { color: var(--niebla); font-size: .98rem; }
+    .panel { position: sticky; top: 24px; background: var(--abismo); color: #fff; border-radius: 18px; padding: 32px 28px; }
+    .panel h3 { font: 700 1.5rem/1.15 var(--titulos); margin: 0 0 10px; letter-spacing: -.02em; }
+    .panel p { color: #BCD3DC; margin: 0 0 24px; font-size: 1rem; }
+    .panel .boton { display: block; text-align: center; margin-bottom: 10px; }
+    .panel small { display: block; color: #8FB1BE; margin-top: 14px; font-size: .9rem; }
+
+    /* Cómo empezar: sí es una secuencia, por eso va numerada */
+    .pasos { background: #fff; border-block: 1px solid var(--linea); }
+    .pasos ol { list-style: none; counter-reset: paso; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .pasos li { counter-increment: paso; }
+    .pasos li::before { content: counter(paso); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+                        background: var(--oceano); color: #fff; font: 700 1.1rem/1 var(--titulos); margin-bottom: 16px; }
+    .pasos b { display: block; font: 700 1.15rem/1.3 var(--titulos); margin-bottom: 6px; }
+    .pasos span { color: var(--niebla); }
+
+    footer { background: var(--abismo); color: #8FB1BE; padding-block: 28px; font-size: .92rem; }
+    footer .envoltura { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer a { color: #CFE3EA; }
+
+    @media (max-width: 880px) {
+      .portada .envoltura { grid-template-columns: 1fr; padding-block: 32px 64px; }
+      .luna { max-width: 240px; justify-self: start; order: -1; }
+      .producto .envoltura, .nosotros .envoltura { grid-template-columns: 1fr; gap: 36px; }
+      .panel { position: static; }
+      .pasos ol { grid-template-columns: 1fr; gap: 28px; }
+      section { padding-block: 56px; }
+    }
+    @media (max-width: 560px) {
+      .funciones { grid-template-columns: 1fr; }
+      .barra nav a:not(.entrar) { display: none; }
+    }
+
+    /* Servicios: dos ofertas, una clara y una oscura (no son tarjetas iguales) */
+    .servicios { padding-block: 0; margin-top: -40px; position: relative; }
+    .servicios .envoltura { display: grid; grid-template-columns: 1fr 1fr; border-radius: 20px; overflow: hidden; box-shadow: 0 18px 40px rgba(10,24,36,.16); }
+    .servicio { padding: 36px 34px 34px; }
+    .servicio.web { background: #fff; }
+    .servicio.escritorio { background: var(--oceano); color: #fff; }
+    .servicio h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 10px; }
+    .servicio p { margin: 0 0 22px; color: var(--niebla); max-width: 46ch; }
+    .servicio.escritorio p { color: #D6ECF5; }
+    .servicio .enlace { font-weight: 600; color: var(--oceano); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    .servicio.escritorio .enlace { color: #fff; }
+    .etiqueta-prueba { display: inline-block; background: #DDF7F2; color: #0B5E54; font-weight: 600; font-size: .9rem; padding: 4px 10px; border-radius: 99px; margin-bottom: 14px; }
+
+    /* Quién está detrás */
+    .persona .envoltura { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+    .persona p { margin: 0 0 16px; max-width: 58ch; }
+    .persona .firma { font: 700 1.15rem/1.3 var(--titulos); margin-top: 22px; }
+    .persona .firma span { display: block; font: 400 .98rem/1.4 var(--texto); color: var(--niebla); }
+    .razones { list-style: none; margin: 0; padding: 0; }
+    .razones li { padding: 16px 0 16px 30px; border-top: 1px solid var(--linea); position: relative; }
+    .razones li:last-child { border-bottom: 1px solid var(--linea); }
+    .razones li::before { content: ""; position: absolute; left: 0; top: 23px; width: 14px; height: 14px; border-radius: 50%;
+                          border: 3px solid var(--marea); border-right-color: transparent; transform: rotate(-35deg); }
+    .razones b { display: block; font: 700 1.05rem/1.3 var(--titulos); }
+    .razones span { color: var(--niebla); font-size: .98rem; }
+
+    /* Contacto */
+    .contacto-final { background: var(--abismo); color: #fff; }
+    .contacto-final .envoltura { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: center; }
+    .contacto-final p { color: #BCD3DC; max-width: 50ch; margin: 0 0 8px; }
+    .datos { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .datos li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .datos li:last-child { border-bottom: 0; }
+    .datos small { color: #8FB1BE; font-size: .92rem; }
+    .datos a { color: #fff; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+    .datos a:hover { text-decoration: underline; }
+    .boton.whatsapp { background: #25D366; color: #06301A; }
+    .boton.whatsapp:hover { background: #4BE083; }
+
+    @media (max-width: 880px) {
+      .servicios { margin-top: -24px; }
+      .servicios .envoltura, .persona .envoltura, .contacto-final .envoltura { grid-template-columns: 1fr; }
+      .persona .envoltura, .contacto-final .envoltura { gap: 36px; }
+    }
+    @media (max-width: 560px) { .datos li { grid-template-columns: 1fr; gap: 2px; } }
+  </style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="envoltura">
+    <a class="marca" href="#" aria-label="EydenCode Solutions, inicio">
+      <img src="img/logo-192.png" alt="" width="42" height="42">
+      <span><b>EydenCode</b> <i>Solutions</i></span>
+    </a>
+    <nav aria-label="Principal">
+      <a href="#ecodepos">ECodePOS</a>
+      <a href="#a-la-medida">A la medida</a>
+      <a href="#quien">Quién soy</a>
+      <a href="#contacto">Contacto</a>
+      <a class="entrar" href="https://ecodepos.eydencodesolutions.com/cuenta/login">Entrar a ECodePOS</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="portada" aria-labelledby="titulo">
+    <div class="envoltura">
+      <div>
+        <h1 id="titulo">Software para tu negocio, a un precio que puedes pagar.</h1>
+        <p>En EydenCode Solutions creamos ECodePOS, el sistema web de facturación e inventario para negocios dominicanos, y programas de escritorio hechos a la medida de lo que tu empresa necesita.</p>
+        <div class="acciones">
+          <a class="boton principal" href="https://ecodepos.eydencodesolutions.com/cuenta/registro">Probar ECodePOS gratis 15 días</a>
+          <a class="boton borde" href="https://wa.me/18297050927?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20EydenCode%20Solutions">Escribir por WhatsApp</a>
+        </div>
+      </div>
+      <!-- La media luna del logo, dibujada (se anima una vez al cargar) -->
+      <svg class="luna" viewBox="0 0 400 400" role="img" aria-label="Logo de EydenCode Solutions">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1DE9C8"/>
+            <stop offset=".55" stop-color="#1688C9"/>
+            <stop offset="1" stop-color="#17C6B0"/>
+          </linearGradient>
+        </defs>
+        <path class="trazo" pathLength="1" d="M300 78 A150 150 0 1 0 312 318" fill="none" stroke="url(#g)" stroke-width="46" stroke-linecap="round"/>
+        <path class="trazo" pathLength="1" d="M262 112 A104 104 0 1 0 272 288" fill="none" stroke="#0D6A9F" stroke-width="16" stroke-linecap="round" opacity=".75"/>
+        <g class="codigo" stroke="#1DE9C8" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <path d="M228 162 L212 238"/>
+          <path d="M262 150 L240 252"/>
+          <path d="M282 156 L326 200 L282 244"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="servicios" aria-label="Servicios">
+    <div class="envoltura">
+      <div class="servicio web">
+        <span class="etiqueta-prueba">Prueba gratis por 15 días</span>
+        <h2>ECodePOS</h2>
+        <p>Factura, controla tu inventario y cobra a tiempo desde el navegador de tu PC, tablet o celular. Sin instalar nada y con tus datos respaldados todos los días.</p>
+        <a class="enlace" href="#ecodepos">Ver todo lo que hace</a>
+      </div>
+      <div class="servicio escritorio" id="a-la-medida">
+        <h2>Software de escritorio a la medida</h2>
+        <p>Si tu negocio necesita algo propio, lo hacemos para ti: un programa para Windows que funciona como tú trabajas, sea facturación, inventario, control de clientes o cualquier proceso de tu empresa. Lo instalamos y te damos soporte.</p>
+        <a class="enlace" href="https://wa.me/18297050927?text=Hola%2C%20quiero%20un%20programa%20a%20la%20medida%20para%20mi%20negocio">Contarnos tu proyecto por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="producto" id="ecodepos" aria-labelledby="t-producto">
+    <div class="envoltura">
+      <div>
+        <h2 id="t-producto">ECodePOS: tu negocio completo en un solo sistema</h2>
+        <p class="entrada">Funciona en el navegador de tu PC, tablet o celular. No instalas nada: entras, facturas y ves cómo va tu negocio en el momento.</p>
+        <ul class="funciones">
+          <li><b>Facturación y punto de venta</b><span>Ticket o factura carta, con o sin comprobante fiscal (NCF), descuentos, crédito y varias formas de pago.</span></li>
+          <li><b>Inventario por almacén</b><span>Existencias al momento, transferencias, ajustes, conteos y alertas cuando algo se está acabando.</span></li>
+          <li><b>Cuentas por cobrar</b><span>Límite de crédito por cliente, abonos, anticipos y saldo a favor, con antigüedad de saldos.</span></li>
+          <li><b>Compras y suplidores</b><span>Órdenes de compra, recepciones, devoluciones y cuentas por pagar.</span></li>
+          <li><b>Caja y bancos</b><span>Apertura y cierre de caja con cuadre, depósitos, transferencias y conciliación.</span></li>
+          <li><b>Reportes</b><span>Ventas y ganancias, formatos 606 y 607 de la DGII, vencimientos y un tablero con lo importante del día.</span></li>
+          <li><b>Usuarios y permisos</b><span>Cada empleado ve solo lo que le toca. Todo lo que se hace queda registrado.</span></li>
+          <li><b>Varias sucursales</b><span>Sucursales, almacenes y cajas separados, con reportes por cada una o de todo junto.</span></li>
+        </ul>
+      </div>
+      <aside class="panel" aria-labelledby="t-panel">
+        <h3 id="t-panel">Pruébalo gratis por 15 días</h3>
+        <p>Registra tu empresa en un par de minutos. Revisamos tus datos y te enviamos tu usuario para que lo uses con tu negocio real.</p>
+        <a class="boton principal" href="https://ecodepos.eydencodesolutions.com/cuenta/registro">Registrar mi empresa</a>
+        <a class="boton borde" href="https://ecodepos.eydencodesolutions.com/cuenta/login">Ya tengo cuenta: entrar</a>
+        <small>Sin compromiso. Si te gusta, seguimos con una suscripción mensual; tus datos se quedan como los dejaste.</small>
+      </aside>
+    </div>
+  </section>
+
+  <section class="pasos" id="como-empezar" aria-labelledby="t-pasos">
+    <div class="envoltura">
+      <h2 id="t-pasos">Cómo empezar con ECodePOS</h2>
+      <p class="entrada">Tres pasos y ya estás facturando.</p>
+      <ol>
+        <li><b>Registra tu empresa</b><span>Llena los datos de tu negocio y del responsable. Toma un par de minutos.</span></li>
+        <li><b>Activamos tu prueba</b><span>Validamos tus datos y te entregamos tu usuario con 15 días gratis para probarlo todo.</span></li>
+        <li><b>Entra y factura</b><span>Eliges tu propia contraseña, cargas tus productos y empiezas a vender.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="persona" id="quien" aria-labelledby="t-quien">
+    <div class="envoltura">
+      <div>
+        <h2 id="t-quien">Quién está detrás</h2>
+        <p>Soy Luis Miguel Pimentel, egresado de la Universidad del Caribe y programador independiente en Bajos de Haina, San Cristóbal.</p>
+        <p>Fundé EydenCode Solutions con una idea clara: que las microempresas dominicanas tengan el mismo tipo de herramientas que usan las empresas grandes, sin pagar lo que cuesta un sistema de esas empresas. Muchos negocios todavía llevan sus ventas en una libreta o en hojas de Excel porque un software de facturación les queda fuera de presupuesto. Ahí es donde quiero ayudar.</p>
+        <p>Cada sistema que hago parte de cómo trabaja de verdad un negocio de aquí: el fiado y las ventas a crédito, los comprobantes fiscales, los reportes que pide la DGII y el cuadre de caja al final del día.</p>
+        <p class="firma">Luis Miguel Pimentel<span>Fundador y programador de EydenCode Solutions</span></p>
+      </div>
+      <ul class="razones" aria-label="Por qué trabajar con EydenCode Solutions">
+        <li><b>Hablas directo con quien programa</b><span>Sin intermediarios ni call centers: me explicas lo que necesitas y lo resolvemos juntos.</span></li>
+        <li><b>Precios pensados para microempresas</b><span>Planes que un negocio pequeño puede pagar, sin contratos largos.</span></li>
+        <li><b>Hecho para cómo se trabaja en RD</b><span>NCF, formatos 606 y 607, ventas a crédito, cobros por abonos y varias formas de pago.</span></li>
+        <li><b>Respuesta rápida</b><span>Disponibilidad inmediata por WhatsApp y correo para dudas, soporte y ajustes.</span></li>
+        <li><b>Un sistema que sigue creciendo</b><span>ECodePOS se mejora todo el tiempo con lo que piden los negocios que lo usan.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contacto-final" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <div>
+        <h2 id="t-contacto">Hablemos de tu negocio</h2>
+        <p>¿Quieres probar ECodePOS, ver una demostración o necesitas un programa a la medida? Escríbeme y te respondo de inmediato.</p>
+        <div class="acciones" style="margin-top:26px">
+          <a class="boton whatsapp" href="https://wa.me/18297050927?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20EydenCode%20Solutions">Escribir por WhatsApp</a>
+          <a class="boton borde" href="mailto:lic.pimentelr@gmail.com">Enviar un correo</a>
+        </div>
+      </div>
+      <ul class="datos">
+        <li><small>WhatsApp</small><a href="https://wa.me/18297050927?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20EydenCode%20Solutions">829-705-0927</a></li>
+        <li><small>Teléfono</small><a href="tel:+18297050927">829-705-0927</a></li>
+        <li><small>Correo</small><a href="mailto:lic.pimentelr@gmail.com">lic.pimentelr@gmail.com</a></li>
+        <li><small>Ubicación</small><span>Bajos de Haina, San Cristóbal, República Dominicana</span></li>
+        <li><small>Atención</small><span>Disponibilidad inmediata por WhatsApp o correo</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="envoltura">
+    <span>© <span id="anio">2026</span> EydenCode Solutions · Bajos de Haina, San Cristóbal, República Dominicana</span>
+    <span><a href="https://ecodepos.eydencodesolutions.com/terminos">Términos</a> &nbsp; <a href="https://ecodepos.eydencodesolutions.com/privacidad">Privacidad</a></span>
+  </div>
+</footer>
+
+<script>document.getElementById("anio").textContent = new Date().getFullYear();</script>
+</body>
+</html>
